@@ -4,7 +4,7 @@
 #
 Name     : perl-Devel-StackTrace-AsHTML
 Version  : 0.15
-Release  : 6
+Release  : 7
 URL      : https://cpan.metacpan.org/authors/id/M/MI/MIYAGAWA/Devel-StackTrace-AsHTML-0.15.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MI/MIYAGAWA/Devel-StackTrace-AsHTML-0.15.tar.gz
 Summary  : 'Displays stack trace in HTML'
