@@ -4,13 +4,14 @@
 #
 Name     : perl-Devel-StackTrace-AsHTML
 Version  : 0.15
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/M/MI/MIYAGAWA/Devel-StackTrace-AsHTML-0.15.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MI/MIYAGAWA/Devel-StackTrace-AsHTML-0.15.tar.gz
 Summary  : 'Displays stack trace in HTML'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Devel-StackTrace-AsHTML-license = %{version}-%{release}
+Requires: perl-Devel-StackTrace-AsHTML-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Devel::StackTrace)
 
@@ -27,6 +28,7 @@ my $html  = $trace->as_html;
 Summary: dev components for the perl-Devel-StackTrace-AsHTML package.
 Group: Development
 Provides: perl-Devel-StackTrace-AsHTML-devel = %{version}-%{release}
+Requires: perl-Devel-StackTrace-AsHTML = %{version}-%{release}
 
 %description dev
 dev components for the perl-Devel-StackTrace-AsHTML package.
@@ -40,14 +42,24 @@ Group: Default
 license components for the perl-Devel-StackTrace-AsHTML package.
 
 
+%package perl
+Summary: perl components for the perl-Devel-StackTrace-AsHTML package.
+Group: Default
+Requires: perl-Devel-StackTrace-AsHTML = %{version}-%{release}
+
+%description perl
+perl components for the perl-Devel-StackTrace-AsHTML package.
+
+
 %prep
 %setup -q -n Devel-StackTrace-AsHTML-0.15
+cd %{_builddir}/Devel-StackTrace-AsHTML-0.15
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -57,7 +69,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -66,7 +78,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Devel-StackTrace-AsHTML
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Devel-StackTrace-AsHTML/LICENSE
+cp %{_builddir}/Devel-StackTrace-AsHTML-0.15/LICENSE %{buildroot}/usr/share/package-licenses/perl-Devel-StackTrace-AsHTML/acc9b5b75998927e689075341ec6c43b9f0adb85
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -79,7 +91,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Devel/StackTrace/AsHTML.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -87,4 +98,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Devel-StackTrace-AsHTML/LICENSE
+/usr/share/package-licenses/perl-Devel-StackTrace-AsHTML/acc9b5b75998927e689075341ec6c43b9f0adb85
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Devel/StackTrace/AsHTML.pm
