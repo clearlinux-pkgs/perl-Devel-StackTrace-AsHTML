@@ -4,7 +4,7 @@
 #
 Name     : perl-Devel-StackTrace-AsHTML
 Version  : 0.15
-Release  : 20
+Release  : 21
 URL      : https://cpan.metacpan.org/authors/id/M/MI/MIYAGAWA/Devel-StackTrace-AsHTML-0.15.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MI/MIYAGAWA/Devel-StackTrace-AsHTML-0.15.tar.gz
 Summary  : 'Displays stack trace in HTML'
@@ -102,4 +102,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/Devel/StackTrace/AsHTML.pm
+/usr/lib/perl5/*
